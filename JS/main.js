@@ -37,14 +37,18 @@ function clearSite() {
 // Display Function
 function displaySite() {
   var siteInfo = "";
+
   for (var i = 0; i < sitesList.length; i++) {
+    var url =
+      sitesList[i].url.startsWith("http://") ||
+      sitesList[i].url.startsWith("https://")
+        ? sitesList[i].url
+        : "https://" + sitesList[i].url;
     siteInfo += `
         <tr>
             <td>${i + 1}</td>
             <td>${sitesList[i].name}</td>
-            <td> <a href="https://${
-              sitesList[i].url
-            }" class='btn' id='view' target="_blank"> <i class="fa-solid fa-eye pe-2"></i>View</a> </td>
+            <td> <a href=${url} class='btn' id='view' target="_blank"> <i class="fa-solid fa-eye pe-2"></i>View</a> </td>
             <td> <button id='delete' class="btn" onclick="deleteSite(${i})"><i class="fa-solid fa-trash-can pe-2"></i> Delete</button></td>
         </tr>`;
   }
